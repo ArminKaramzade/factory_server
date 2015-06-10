@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ServerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ServerModelStoreContainer">
+    <EntitySet Name="Users" EntityType="ServerModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reports" EntityType="ServerModel.Store.Reports" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Attachments" EntityType="ServerModel.Store.Attachments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReportCategories" EntityType="ServerModel.Store.ReportCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RequestModels1" EntityType="ServerModel.Store.RequestModels1" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserUser" Association="ServerModel.Store.UserUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User1" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="ReportAttachments" Association="ServerModel.Store.ReportAttachments">
+      <End Role="Report" EntitySet="Reports" />
+      <End Role="Attachments" EntitySet="Attachments" />
+    </AssociationSet>
+    <AssociationSet Name="ReportReportCategory" Association="ServerModel.Store.ReportReportCategory">
+      <End Role="Report" EntitySet="Reports" />
+      <End Role="ReportCategory" EntitySet="ReportCategories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Age" Type="smallint" Nullable="false" />
+    <Property Name="EmploymentDate" Type="datetime" Nullable="false" />
+    <Property Name="Resume" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AvatarLocation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NationalId" Type="int" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="bit" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DefaultUser" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="IsNew" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sender_ID" Type="int" Nullable="false" />
+    <Property Name="Sender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Recipient_ID" Type="int" Nullable="false" />
+    <Property Name="Recipient" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SendDate" Type="datetime" Nullable="false" />
+    <Property Name="isRead" Type="bit" Nullable="false" />
+    <Property Name="isMark" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsNew" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="ReportCategory_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Attachments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileLocation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="uploadTime" Type="datetime" Nullable="false" />
+    <Property Name="Report_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReportCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RequestModels1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Recipient" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SendDate" Type="datetime" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Context" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SenderId" Type="int" Nullable="false" />
+    <Property Name="RecipientId" Type="int" Nullable="false" />
+    <Property Name="Follow" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="real" Nullable="false" />
+    <Property Name="IsNew" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="isAnswered" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <Association Name="UserUser">
+    <End Role="User" Type="ServerModel.Store.Users" Multiplicity="1" />
+    <End Role="User1" Type="ServerModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User1">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReportAttachments">
+    <End Role="Report" Type="ServerModel.Store.Reports" Multiplicity="1" />
+    <End Role="Attachments" Type="ServerModel.Store.Attachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Report">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attachments">
+        <PropertyRef Name="Report_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReportReportCategory">
+    <End Role="Report" Type="ServerModel.Store.Reports" Multiplicity="*" />
+    <End Role="ReportCategory" Type="ServerModel.Store.ReportCategories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ReportCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="ReportCategory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ServerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ServerContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="ServerModel.User" />
+          <EntitySet Name="Reports" EntityType="ServerModel.Report" />
+          <EntitySet Name="Attachments" EntityType="ServerModel.Attachments" />
+          <EntitySet Name="ReportCategories" EntityType="ServerModel.ReportCategory" />
+          <EntitySet Name="RequestModels1" EntityType="ServerModel.RequestModel" />
+          <AssociationSet Name="UserUser" Association="ServerModel.UserUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="ReportAttachments" Association="ServerModel.ReportAttachments">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="Attachments" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="ReportReportCategory" Association="ServerModel.ReportReportCategory">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="ReportCategory" EntitySet="ReportCategories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" />
+          <Property Name="Age" Type="Int16" Nullable="false" />
+          <Property Name="EmploymentDate" Type="DateTime" Nullable="false" />
+          <Property Name="Resume" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="AvatarLocation" Type="String" Nullable="false" />
+          <Property Name="NationalId" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" />
+          <Property Name="DefaultUser" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="IsNew" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <NavigationProperty Name="User1" Relationship="ServerModel.UserUser" FromRole="User1" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sender_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sender" Type="String" Nullable="false" />
+          <Property Name="Recipient_ID" Type="Int32" Nullable="false" />
+          <Property Name="Recipient" Type="String" Nullable="false" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" />
+          <Property Name="isRead" Type="Boolean" Nullable="false" />
+          <Property Name="isMark" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="IsNew" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <NavigationProperty Name="Attachment" Relationship="ServerModel.ReportAttachments" FromRole="Report" ToRole="Attachments" />
+          <NavigationProperty Name="ReportCategory" Relationship="ServerModel.ReportReportCategory" FromRole="Report" ToRole="ReportCategory" />
+        </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileLocation" Type="String" Nullable="false" />
+          <Property Name="uploadTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Report" Relationship="ServerModel.ReportAttachments" FromRole="Attachments" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="ReportCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <NavigationProperty Name="Reports" Relationship="ServerModel.ReportReportCategory" FromRole="ReportCategory" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="RequestModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sender" Type="String" Nullable="false" />
+          <Property Name="Recipient" Type="String" Nullable="false" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Context" Type="String" Nullable="false" />
+          <Property Name="SenderId" Type="Int32" Nullable="false" />
+          <Property Name="RecipientId" Type="Int32" Nullable="false" />
+          <Property Name="Follow" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="Answer" Type="String" Nullable="false" />
+          <Property Name="Status" Type="Single" Nullable="false" />
+          <Property Name="IsNew" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="isAnswered" Type="Boolean" Nullable="false" DefaultValue="False" />
+        </EntityType>
+        <Association Name="UserUser">
+          <End Type="ServerModel.User" Role="User" Multiplicity="1" />
+          <End Type="ServerModel.User" Role="User1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ReportAttachments">
+          <End Type="ServerModel.Report" Role="Report" Multiplicity="1" />
+          <End Type="ServerModel.Attachments" Role="Attachments" Multiplicity="0..1" />
+        </Association>
+        <Association Name="ReportReportCategory">
+          <End Type="ServerModel.Report" Role="Report" Multiplicity="*" />
+          <End Type="ServerModel.ReportCategory" Role="ReportCategory" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ServerModelStoreContainer" CdmEntityContainer="ServerContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(ServerModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="EmploymentDate" ColumnName="EmploymentDate" />
+          <ScalarProperty Name="Resume" ColumnName="Resume" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AvatarLocation" ColumnName="AvatarLocation" />
+          <ScalarProperty Name="NationalId" ColumnName="NationalId" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="DefaultUser" ColumnName="DefaultUser" />
+          <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="IsTypeOf(ServerModel.Report)">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sender_ID" ColumnName="Sender_ID" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Recipient_ID" ColumnName="Recipient_ID" />
+          <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+          <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+          <ScalarProperty Name="isRead" ColumnName="isRead" />
+          <ScalarProperty Name="isMark" ColumnName="isMark" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attachments">
+      <EntityTypeMapping TypeName="IsTypeOf(ServerModel.Attachments)">
+        <MappingFragment StoreEntitySet="Attachments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FileLocation" ColumnName="FileLocation" />
+          <ScalarProperty Name="uploadTime" ColumnName="uploadTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(ServerModel.ReportCategory)">
+        <MappingFragment StoreEntitySet="ReportCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequestModels1">
+      <EntityTypeMapping TypeName="IsTypeOf(ServerModel.RequestModel)">
+        <MappingFragment StoreEntitySet="RequestModels1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+          <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Context" ColumnName="Context" />
+          <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+          <ScalarProperty Name="RecipientId" ColumnName="RecipientId" />
+          <ScalarProperty Name="Follow" ColumnName="Follow" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+          <ScalarProperty Name="isAnswered" ColumnName="isAnswered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ReportAttachments" TypeName="ServerModel.ReportAttachments" StoreEntitySet="Attachments">
+      <EndProperty Name="Report">
+        <ScalarProperty Name="Id" ColumnName="Report_Id" />
+      </EndProperty>
+      <EndProperty Name="Attachments">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ReportReportCategory" TypeName="ServerModel.ReportReportCategory" StoreEntitySet="Reports">
+      <EndProperty Name="ReportCategory">
+        <ScalarProperty Name="Id" ColumnName="ReportCategory_Id" />
+      </EndProperty>
+      <EndProperty Name="Report">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
